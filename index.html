@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PixelForge Studios - Game Developer Website</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth
+        }
+
+        /* ===== Fancy Button Hover (pakai warna yang ada) ===== */
+        .btn-gradient {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: .75rem;
+            padding: .75rem 1.5rem;
+            font-weight: 700;
+            background-image: linear-gradient(90deg, #9f16c4, #ff005c, #3f094d);
+            background-size: 200% 100%;
+            color: #fff;
+            transition: transform .25s ease, box-shadow .25s ease, background-position .6s ease;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        }
+
+        .btn-gradient:hover {
+            background-position: 100% 0;
+            transform: translateY(-1px) scale(1.03);
+            box-shadow:
+                0 12px 30px rgba(255, 0, 92, 0.25),
+                0 4px 16px rgba(159, 22, 196, 0.25);
+        }
+
+        .btn-gradient:focus-visible {
+            outline: 2px solid #ff005c;
+            outline-offset: 3px;
+        }
+
+        .btn-ghost {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: .75rem;
+            padding: .75rem 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0, 0, 0, .35);
+            border: 1px solid rgba(255, 255, 255, .2);
+            transition: background .25s ease, box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(0, 0, 0, .6);
+            border-color: rgba(255, 0, 92, .45);
+            transform: translateY(-1px);
+            box-shadow:
+                0 10px 24px rgba(63, 9, 77, 0.25),
+                inset 0 0 0 1px rgba(159, 22, 196, 0.35);
+        }
+
+        .btn-ghost:focus-visible {
+            outline: 2px solid #9f16c4;
+            outline-offset: 3px;
+        }
+
+        /* ===== Animasi masuk lembut ===== */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.5s ease-out forwards
+        }
+
+        /* ===== Posisi card process: setengah badan masuk ke gambar ===== */
+        /* Kita posisikan relatif ke wrapper gambar, lalu geser 50% ke arah tengah */
+        /* ===== Animasi ===== */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.5s ease-out forwards
+        }
+
+        /* ===== Lebar kartu process responsif ===== */
+        .process-card {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .process-card {
+                width: 16rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a] antialiased text-white">
+
+    <!-- GLOBAL GRADIENT BACKGROUND (3 warna) -->
+    <div class="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3f094d] via-[#9f16c4] to-[#ff005c] opacity-30"></div>
+        <div
+            class="absolute -top-1/4 -left-1/5 w-[650px] h-[650px] bg-[#3f094d]/30 rounded-full blur-3xl animate-pulse">
+        </div>
+        <div
+            class="absolute bottom-[-20%] right-[-10%] w-[520px] h-[520px] bg-[#9f16c4]/25 rounded-full blur-3xl animate-pulse">
+        </div>
+        <div class="absolute top-1/3 right-1/4 w-[420px] h-[420px] bg-[#ff005c]/25 rounded-full blur-3xl animate-pulse">
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 w-full flex justify-center p-4 z-50">
+        <nav class="w-full max-w-5xl relative">
+            <div
+                class="absolute -top-4 left-1/2 -translate-x-1/2 w-48 h-8 bg-[#ff005c]/40 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="flex items-center justify-between w-full h-16 px-6 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl">
+                <a href="#" class="flex items-center gap-2">
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 8.33333V15.6667L13.3333 12L8 8.33333Z" fill="currentColor" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16 8V16L10 12L16 8Z"
+                            fill="currentColor" />
+                    </svg>
+                    <span class="text-xl font-bold">PixelForge</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+                <a href="#" class="hidden md:block btn-ghost rounded-full">Get a Quote</a>
+                <button id="menuBtn" class="md:hidden" aria-expanded="false" aria-controls="mobileMenu">
+                    <!-- Icon hamburger -->
+                    <svg id="iconOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <!-- Icon close (X) -->
+                    <svg id="iconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+
+            </div>
+
+            <!-- MOBILE MENU PANEL -->
+            <!-- ganti kelas 'z-50' jadi 'z-40' dan pastikan ada kelas-kelas berikut -->
+            <div id="mobileMenu"
+                class="md:hidden absolute top-full left-0 right-0 mt-3 px-2 z-40 hidden opacity-0 scale-95 pointer-events-none transition duration-200">
+                <div class="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-4">
+                    <a href="#services" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Services</a>
+                    <a href="#process" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Process</a>
+                    <a href="#pricing" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Pricing</a>
+                    <a href="#contact" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Contact</a>
+                    <div class="mt-3 border-t border-white/10 pt-3">
+                        <a href="#contact" class="w-full block text-center btn-gradient">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <main class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-24">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- IMAGE: tampil dulu di mobile, pindah ke kanan di desktop -->
+                <div class="relative order-1 md:order-2 block mb-8 md:mb-0">
+                    <div
+                        class="absolute -inset-2 rounded-2xl blur-xl opacity-60 bg-gradient-to-r from-[#9f16c4] via-[#ff005c] to-[#3f094d]">
+                    </div>
+                    <img src="https://jbreaker.ru/images/stories/pics/pix4/maxresdefault2321331.jpg"
+                        alt="Elden Ring Screenshot"
+                        class="relative w-full rounded-2xl shadow-2xl transform md:hover:scale-105 transition-transform duration-500 ease-out"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=Image+Not+Found';">
+                </div>
+
+                <!-- TEXT: muncul setelah gambar di mobile, pindah ke kiri di desktop -->
+                <div class="text-center md:text-left order-2 md:order-1">
+                    <span class="text-sm font-bold tracking-wider text-[#ff005c] uppercase">Your Vision, Our Code</span>
+                    <h1
+                        class="text-4xl md:text-6xl font-bold mt-4 leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">
+                        We Build Worlds, Not Just Games
+                    </h1>
+                    <p class="mt-6 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">
+                        From epic RPGs to addictive mobile puzzles, we are the creative force behind your next big hit.
+                    </p>
+                    <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#" class="btn-gradient">Explore Games</a>
+                        <a href="#services" class="btn-ghost">Our Services</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Services -->
+    <section id="services" class="py-20 sm:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-sm font-bold tracking-wider text-[#ff005c] uppercase">Our Expertise</span>
+                <h2
+                    class="text-3xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white/95 to-white/70">
+                    What We Offer</h2>
+                <p class="mt-6 text-lg text-gray-300">We provide end-to-end solutions to bring your game ideas to life,
+                    ensuring quality and engagement at every step.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 6 Kartu layanan (tetap) -->
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#9f16c4]/20 border-[#9f16c4]/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Full-Cycle Development</h3>
+                    <p class="text-gray-300">From initial concept and prototyping to final launch and post-release
+                        support, we handle it all.</p>
+                </div>
+
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#ff005c]/20 border-[#ff005c]/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Multi-Platform Expertise</h3>
+                    <p class="text-gray-300">We build games that run seamlessly on PC, consoles (PlayStation, Xbox,
+                        Switch), and mobile devices.</p>
+                </div>
+
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#3f094d]/30 border-[#3f094d]/40">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Stunning 2D/3D Art</h3>
+                    <p class="text-gray-300">Our artists create breathtaking visuals, characters, and environments that
+                        captivate players.</p>
+                </div>
+
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#9f16c4]/20 border-[#9f16c4]/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Live Ops & Support</h3>
+                    <p class="text-gray-300">We keep your game thriving with regular updates, events, and dedicated
+                        community management.</p>
+                </div>
+
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#ff005c]/20 border-[#ff005c]/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Engaging Mechanics</h3>
+                    <p class="text-gray-300">Crafting innovative and addictive gameplay loops is at the heart of what we
+                        do.</p>
+                </div>
+
+                <div
+                    class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col items-start gap-4 hover:-translate-y-2 transition-transform">
+                    <div class="p-3 rounded-lg border bg-[#3f094d]/30 border-[#3f094d]/40">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">QA & Testing</h3>
+                    <p class="text-gray-300">Ensuring a bug-free, polished, and perfectly balanced experience for
+                        players.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-20 sm:py-32 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-sm font-bold tracking-wider text-[#9f16c4] uppercase">How We Work</span>
+                <h2
+                    class="text-3xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">
+                    Our Development Process
+                </h2>
+                <p class="mt-6 text-lg text-gray-300">A transparent and collaborative journey from a simple idea to a
+                    blockbuster game.</p>
+            </div>
+
+            <div class="relative mt-20 h-auto md:h-[650px] md:flex md:items-center md:justify-center">
+                <!-- Wrapper gambar menjadi anchor absolut untuk card -->
+                <div class="relative max-w-4xl mx-auto">
+                    <div
+                        class="absolute -inset-4 rounded-3xl blur-2xl opacity-50 bg-gradient-to-r from-[#9f16c4] via-[#ff005c] to-[#3f094d]">
+                    </div>
+                    <img src="https://l2kain.net/assets/img/features/hf/1.jpg" alt="Game Art Concept"
+                        onerror="this.onerror=null;this.src='https://placehold.co/1024x768/0f172a/9ca3af?text=Game+Art';"
+                        class="relative w-full rounded-3xl shadow-2xl">
+
+                    <!-- GRID MOBILE (tampil hanya < md) -->
+                    <div class="mt-6 grid grid-cols-1 xs:grid-cols-2 gap-4 md:hidden">
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">1. Concept & Story</h4>
+                            <p class="text-sm text-gray-300 mt-2">We brainstorm ideas and craft a compelling narrative
+                                to build the game's foundation.</p>
+                        </div>
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">2. Prototyping</h4>
+                            <p class="text-sm text-gray-300 mt-2">Creating core mechanics and testing gameplay loops to
+                                ensure the game is fun.</p>
+                        </div>
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">3. Full Production</h4>
+                            <p class="text-sm text-gray-300 mt-2">Developing art assets, coding features, and building
+                                the game world.</p>
+                        </div>
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">4. Launch & Support</h4>
+                            <p class="text-sm text-gray-300 mt-2">Deploying the game to platforms and providing ongoing
+                                updates and support.</p>
+                        </div>
+                    </div>
+
+                    <!-- FLOATING DESKTOP (tampil hanya ≥ md) -->
+                    <!-- TOP-LEFT -->
+                    <div class="hidden md:block absolute -top-16 -left-16 md:translate-x-[10%] md:translate-y-[10%] md:opacity-0 animate-fade-in-up"
+                        style="animation-delay:200ms;">
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">1. Concept & Story</h4>
+                            <p class="text-sm text-gray-300 mt-2">We brainstorm ideas and craft a compelling narrative
+                                to build the game's foundation.</p>
+                        </div>
+                    </div>
+
+                    <!-- TOP-RIGHT -->
+                    <div class="hidden md:block absolute -top-16 -right-16 md:-translate-x-[10%] md:translate-y-[10%] md:opacity-0 animate-fade-in-up"
+                        style="animation-delay:400ms;">
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">2. Prototyping</h4>
+                            <p class="text-sm text-gray-300 mt-2">Creating core mechanics and testing gameplay loops to
+                                ensure the game is fun.</p>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM-LEFT -->
+                    <div class="hidden md:block absolute -bottom-16 -left-16 md:translate-x-[10%] md:-translate-y-[10%] md:opacity-0 animate-fade-in-up"
+                        style="animation-delay:600ms;">
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">3. Full Production</h4>
+                            <p class="text-sm text-gray-300 mt-2">Developing art assets, coding features, and building
+                                the game world.</p>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM-RIGHT -->
+                    <div class="hidden md:block absolute -bottom-16 -right-16 md:-translate-x-[10%] md:-translate-y-[10%] md:opacity-0 animate-fade-in-up"
+                        style="animation-delay:800ms;">
+                        <div class="process-card p-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl">
+                            <h4 class="font-bold text-lg">4. Launch & Support</h4>
+                            <p class="text-sm text-gray-300 mt-2">Deploying the game to platforms and providing ongoing
+                                updates and support.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-20 sm:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-sm font-bold tracking-wider text-[#9f16c4] uppercase">Pricing Plans</span>
+                <h2
+                    class="text-3xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">
+                    Choose The Best Plan
+                </h2>
+                <p class="mt-6 text-lg text-gray-300">We offer flexible pricing options to match the scope and scale of
+                    your project.</p>
+            </div>
+
+            <div class="mt-16 grid lg:grid-cols-3 gap-8 items-start">
+                <!-- Indie -->
+                <div class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl h-full flex flex-col">
+                    <h3 class="text-2xl font-bold">Indie</h3>
+                    <p class="mt-2 text-gray-300">Perfect for small teams and solo developers.</p>
+                    <p class="mt-6 text-4xl font-bold">$5k<span
+                            class="text-lg font-medium text-gray-300">/project</span></p>
+                    <a href="#" class="w-full mt-8 text-center btn-ghost">Get Started</a>
+                    <ul class="mt-8 space-y-4 text-gray-200 flex-1">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Concept & Prototyping</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Core Gameplay Loop</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Basic 2D/3D Assets</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Community Support</li>
+                    </ul>
+                </div>
+
+                <!-- Studio (featured) -->
+                <div
+                    class="p-8 bg-black/60 backdrop-blur-xl border-2 border-[#ff005c] rounded-2xl h-full flex flex-col shadow-2xl transform scale-105">
+                    <h3 class="text-2xl font-bold text-[#ff005c]">Studio</h3>
+                    <p class="mt-2 text-gray-300">The most popular choice for established studios.</p>
+                    <p class="mt-6 text-4xl font-bold">$25k<span
+                            class="text-lg font-medium text-gray-300">/project</span></p>
+                    <a href="#" class="w-full mt-8 text-center btn-gradient">Choose Plan</a>
+                    <ul class="mt-8 space-y-4 text-gray-200 flex-1">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#ff005c]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Full-Cycle Development</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#ff005c]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Multi-Platform Support</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#ff005c]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Advanced Art & Animation</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#ff005c]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Live Ops & Monetization</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#ff005c]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Dedicated Project Manager</li>
+                    </ul>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="p-8 bg-black/35 backdrop-blur-xl border border-white/10 rounded-2xl h-full flex flex-col">
+                    <h3 class="text-2xl font-bold">Enterprise</h3>
+                    <p class="mt-2 text-gray-300">For large-scale, AAA-level projects.</p>
+                    <p class="mt-6 text-4xl font-bold">Custom</p>
+                    <a href="#" class="w-full mt-8 text-center btn-ghost">Contact Us</a>
+                    <ul class="mt-8 space-y-4 text-gray-200 flex-1">
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>All Studio Features</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Dedicated Development Team</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>Custom IP Creation</li>
+                        <li class="flex items-center gap-3"><svg class="w-5 h-5 text-[#9f16c4]" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>24/7 Priority Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="py-20 sm:py-32">
+        <div class="container mx-auto px-6">
+            <div class="relative rounded-3xl overflow-visible">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#9f16c4]/25 via-[#ff005c]/25 to-[#3f094d]/25"></div>
+                <div class="p-12 grid md:grid-cols-2 gap-12 items-center relative">
+                    <div class="text-center md:text-left z-10">
+                        <h2 class="text-3xl md:text-4xl font-bold leading-tight">Ready to Build Your Dream Game?</h2>
+                        <p class="mt-4 text-lg text-gray-200">Let's talk about your project. We're here to turn your
+                            vision into a reality.</p>
+                        <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                            <a href="#" class="btn-gradient">Get a Free Quote</a>
+                            <a href="#" class="btn-ghost">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="md:absolute inset-y-0 right-0 md:w-1/2 h-full">
+                        <div class="relative h-full">
+                            <img src="https://www.pngplay.com/wp-content/uploads/11/The-Legend-Of-Zelda-Transparent-PNG.png"
+                                alt="Game Character"
+                                class="absolute right-[-2rem] top-1/2 -translate-y-1/2 h-[140%] w-auto max-w-none pointer-events-none drop-shadow-[0_20px_40px_rgba(255,0,92,0.35)]"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x600/1f2937/ffffff?text=Image+Not+Found';">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-1">
+                    <a href="#" class="flex items-center gap-2">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 8.33333V15.6667L13.3333 12L8 8.33333Z" fill="currentColor" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16 8V16L10 12L16 8Z"
+                                fill="currentColor" />
+                        </svg>
+                        <span class="text-2xl font-bold">PixelForge</span>
+                    </a>
+                    <p class="mt-4 text-gray-300 text-sm">Crafting unforgettable gaming experiences from concept to
+                        launch.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        Navigate
+                    </h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                        </li>
+                        <li><a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a></li>
+                        <li><a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Portfolio</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Support
+                    </h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Contact
+                    </h4>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="mailto:hello@pixelforge.com"
+                                class="text-gray-300 hover:text-white transition-colors">hello@pixelforge.com</a></li>
+                        <li><a href="tel:+123456789" class="text-gray-300 hover:text-white transition-colors">+1 234 567
+                                89</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between">
+                <p class="text-gray-300 text-sm">&copy; 2024 PixelForge Studios. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 sm:mt-0">
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.477 2 12.001c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.001C22 6.477 17.523 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('menuBtn');
+            const menu = document.getElementById('mobileMenu');
+            const body = document.body;
+            const iconOpen = document.getElementById('iconOpen');
+            const iconClose = document.getElementById('iconClose');
+
+            if (!btn || !menu) return;
+
+            let isOpen = false;
+            let closeTimer = null;
+
+            const OPEN_CLS = ['opacity-100', 'scale-100'];
+            const CLOSE_CLS = ['opacity-0', 'scale-95', 'pointer-events-none'];
+
+            function openMenu() {
+                clearTimeout(closeTimer);
+                menu.classList.remove('hidden', ...CLOSE_CLS);
+                // jalankan frame berikutnya agar transition kepicu
+                requestAnimationFrame(() => menu.classList.add(...OPEN_CLS));
+                btn.setAttribute('aria-expanded', 'true');
+                iconOpen && iconOpen.classList.add('hidden');
+                iconClose && iconClose.classList.remove('hidden');
+                body.classList.add('overflow-hidden');
+                isOpen = true;
+            }
+
+            function closeMenu() {
+                clearTimeout(closeTimer);
+                // buang kelas "open", tambah kelas "close"
+                menu.classList.remove(...OPEN_CLS);
+                menu.classList.add(...CLOSE_CLS);
+                btn.setAttribute('aria-expanded', 'false');
+                iconOpen && iconOpen.classList.remove('hidden');
+                iconClose && iconClose.classList.add('hidden');
+                body.classList.remove('overflow-hidden');
+                // sembunyikan setelah animasi (200ms)
+                closeTimer = setTimeout(() => menu.classList.add('hidden'), 220);
+                isOpen = false;
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isOpen ? closeMenu() : openMenu();
+            });
+
+            // tutup saat klik di luar
+            document.addEventListener('click', (e) => {
+                if (!isOpen) return;
+                if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+            });
+
+            // tutup dengan Escape
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isOpen) closeMenu();
+            });
+
+            // auto-close saat resize ke ≥ md
+            const mq = window.matchMedia('(min-width: 768px)');
+            const onMQ = (e) => { if (e.matches && isOpen) closeMenu(); };
+            mq.addEventListener ? mq.addEventListener('change', onMQ) : mq.addListener(onMQ);
+        });
+    </script>
+
+
+
+</body>
+
+</html>
