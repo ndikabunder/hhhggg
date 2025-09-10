@@ -126,6 +126,7 @@
 <body class="bg-[#0a0a0a] antialiased text-white">
 
     <!-- GLOBAL GRADIENT BACKGROUND (3 warna) -->
+    <!-- Komponen ini bertanggung jawab untuk latar belakang gradien animasi yang ada di seluruh halaman. -->
     <div class="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-[#3f094d] via-[#9f16c4] to-[#ff005c] opacity-30"></div>
         <div
@@ -139,6 +140,7 @@
     </div>
 
     <!-- Navbar -->
+    <!-- Header utama berisi navigasi situs. Posisinya tetap (fixed) di bagian atas. -->
     <header class="fixed top-0 left-0 w-full flex justify-center p-4 z-50">
         <nav class="w-full max-w-5xl relative">
             <div
@@ -157,6 +159,7 @@
                 </a>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Portfolio</a>
                     <a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a>
                     <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
                     <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
@@ -178,11 +181,12 @@
             </div>
 
             <!-- MOBILE MENU PANEL -->
-            <!-- ganti kelas 'z-50' jadi 'z-40' dan pastikan ada kelas-kelas berikut -->
+            <!-- Panel menu ini hanya akan muncul di perangkat mobile. -->
             <div id="mobileMenu"
                 class="md:hidden absolute top-full left-0 right-0 mt-3 px-2 z-40 hidden opacity-0 scale-95 pointer-events-none transition duration-200">
                 <div class="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-4">
                     <a href="#services" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Services</a>
+                    <a href="#portfolio" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Portfolio</a>
                     <a href="#process" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Process</a>
                     <a href="#pricing" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Pricing</a>
                     <a href="#contact" class="block px-4 py-3 rounded-lg hover:bg-white/10 transition">Contact</a>
@@ -198,18 +202,23 @@
     </header>
 
     <!-- Hero -->
+    <!-- Bagian utama (hero section) yang pertama kali dilihat pengunjung. -->
     <main class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-24">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- IMAGE: tampil dulu di mobile, pindah ke kanan di desktop -->
+                <!-- Video Player: tampil dulu di mobile, pindah ke kanan di desktop -->
                 <div class="relative order-1 md:order-2 block mb-8 md:mb-0">
                     <div
                         class="absolute -inset-2 rounded-2xl blur-xl opacity-60 bg-gradient-to-r from-[#9f16c4] via-[#ff005c] to-[#3f094d]">
                     </div>
-                    <img src="https://jbreaker.ru/images/stories/pics/pix4/maxresdefault2321331.jpg"
-                        alt="Elden Ring Screenshot"
-                        class="relative w-full rounded-2xl shadow-2xl transform md:hover:scale-105 transition-transform duration-500 ease-out"
-                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=Image+Not+Found';">
+                    <div class="relative w-full aspect-video rounded-2xl shadow-2xl overflow-hidden">
+                        <iframe class="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/X7HjcX5pXLs?autoplay=1&mute=1&loop=1&playlist=X7HjcX5pXLs&controls=0&showinfo=0&autohide=1&modestbranding=1"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
 
                 <!-- TEXT: muncul setelah gambar di mobile, pindah ke kiri di desktop -->
@@ -233,6 +242,7 @@
     </main>
 
     <!-- Services -->
+    <!-- Bagian ini menampilkan layanan-layanan yang ditawarkan. -->
     <section id="services" class="py-20 sm:py-32">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto">
@@ -332,7 +342,76 @@
         </div>
     </section>
 
+    <!-- Portfolio Gallery -->
+    <!-- Bagian ini menampilkan portofolio game yang telah dibuat. -->
+    <section id="portfolio" class="py-20 sm:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-sm font-bold tracking-wider text-[#ff005c] uppercase">Our Work</span>
+                <h2
+                    class="text-3xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white/95 to-white/70">
+                    Explore Our Games
+                </h2>
+                <p class="mt-6 text-lg text-gray-300">Here are some of the worlds we've brought to life. Each project is
+                    a testament to our passion for gaming.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game 1 -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-black/35 border border-white/10 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#ff005c]/20 hover:-translate-y-2">
+                    <img src="https://img.itch.zone/aW1hZ2UvMzYyNzY4Ni8yMTYwOTA5My5wbmc=/original/PT%2BZ1N.png"
+                        alt="Game 1"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=Project+Alpha';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-2xl font-bold">Project Alpha</h3>
+                        <p class="text-gray-300 mt-2 text-sm">An open-world RPG with a rich story and dynamic combat
+                            system.</p>
+                        <a href="#" class="mt-4 inline-block text-[#ff005c] font-semibold hover:underline">Learn More
+                            &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Game 2 -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-black/35 border border-white/10 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#9f16c4]/20 hover:-translate-y-2">
+                    <img src="https://img.itch.zone/aW1hZ2UvMzc4NDA1Mi8yMjU1NTcyNi5wbmc=/original/k4G9MY.png"
+                        alt="Game 2"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=Cyber+Runner';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-2xl font-bold">Cyber Runner</h3>
+                        <p class="text-gray-300 mt-2 text-sm">A fast-paced mobile endless runner set in a neon-lit
+                            cyberpunk city.</p>
+                        <a href="#" class="mt-4 inline-block text-[#ff005c] font-semibold hover:underline">Learn More
+                            &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Game 3 -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-black/35 border border-white/10 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#3f094d]/20 hover:-translate-y-2">
+                    <img src="https://i.postimg.cc/yxDLBjJb/Screenshot-2025-09-10-084229-Photoroom.png" alt="Game 3"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=Galaxy+Defenders';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-2xl font-bold">Galaxy Defenders</h3>
+                        <p class="text-gray-300 mt-2 text-sm">A co-op top-down shooter where you defend the galaxy from
+                            alien hordes.</p>
+                        <a href="#" class="mt-4 inline-block text-[#ff005c] font-semibold hover:underline">Learn More
+                            &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Process -->
+    <!-- Bagian ini menjelaskan proses kerja atau alur pengembangan. -->
     <section id="process" class="py-20 sm:py-32 overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto">
@@ -351,7 +430,8 @@
                     <div
                         class="absolute -inset-4 rounded-3xl blur-2xl opacity-50 bg-gradient-to-r from-[#9f16c4] via-[#ff005c] to-[#3f094d]">
                     </div>
-                    <img src="https://l2kain.net/assets/img/features/hf/1.jpg" alt="Game Art Concept"
+                    <img src="https://img.itch.zone/aW1hZ2UvMzc4NDA1Mi8yMjU1NTcyNi5wbmc=/original/k4G9MY.png"
+                        alt="Game Art Concept"
                         onerror="this.onerror=null;this.src='https://placehold.co/1024x768/0f172a/9ca3af?text=Game+Art';"
                         class="relative w-full rounded-3xl shadow-2xl">
 
@@ -427,6 +507,7 @@
     </section>
 
     <!-- Pricing -->
+    <!-- Bagian ini menampilkan pilihan harga atau paket layanan. -->
     <section id="pricing" class="py-20 sm:py-32">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto">
@@ -542,6 +623,7 @@
     </section>
 
     <!-- CTA -->
+    <!-- Bagian Call-to-Action (CTA) untuk mengajak pengunjung melakukan tindakan. -->
     <section id="contact" class="py-20 sm:py-32">
         <div class="container mx-auto px-6">
             <div class="relative rounded-3xl overflow-visible">
@@ -558,7 +640,7 @@
                     </div>
                     <div class="md:absolute inset-y-0 right-0 md:w-1/2 h-full">
                         <div class="relative h-full">
-                            <img src="https://www.pngplay.com/wp-content/uploads/11/The-Legend-Of-Zelda-Transparent-PNG.png"
+                            <img src="https://i.postimg.cc/yxDLBjJb/Screenshot-2025-09-10-084229-Photoroom.png"
                                 alt="Game Character"
                                 class="absolute right-[-2rem] top-1/2 -translate-y-1/2 h-[140%] w-auto max-w-none pointer-events-none drop-shadow-[0_20px_40px_rgba(255,0,92,0.35)]"
                                 onerror="this.onerror=null;this.src='https://placehold.co/600x600/1f2937/ffffff?text=Image+Not+Found';">
@@ -571,6 +653,7 @@
     </section>
 
     <!-- Footer -->
+    <!-- Bagian footer berisi informasi kontak, navigasi tambahan, dan hak cipta. -->
     <footer class="pt-20 pb-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -599,9 +682,11 @@
                     <ul class="mt-4 space-y-3">
                         <li><a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
                         </li>
+                        <li><a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                        </li>
                         <li><a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a></li>
                         <li><a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Portfolio</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
